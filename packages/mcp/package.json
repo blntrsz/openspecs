@@ -2,7 +2,7 @@
   "name": "@openspecs/mcp",
   "module": "index.ts",
   "type": "module",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "main": "dist/index.js",
   "bin": {
     "mcp-server-openspecs": "dist/index.js"

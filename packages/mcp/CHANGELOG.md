@@ -1,5 +1,11 @@
 # @openspecs/mcp
 
+## 0.1.7
+
+### Patch Changes
+
+- 83173c8: add exports
+
 ## 0.1.6
 
 ### Patch Changes
