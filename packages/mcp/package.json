@@ -4,6 +4,9 @@
   "type": "module",
   "version": "0.1.0",
   "main": "dist/index.js",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "bun build ./src/index.ts  --target=node --outfile dist/index.js",
     "inspect": "npx @modelcontextprotocol/inspector bun run src/index.ts"
