@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+set -e
+
+(cd packages/mcp && bun run build)
+bun changeset publish

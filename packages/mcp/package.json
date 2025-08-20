@@ -3,6 +3,7 @@
   "module": "index.ts",
   "type": "module",
   "version": "0.0.1",
+  "main": "dist/index.js",
   "scripts": {
     "build": "bun build ./src/index.ts  --target=node --outfile dist/index.js",
     "inspect": "npx @modelcontextprotocol/inspector bun run src/index.ts"
