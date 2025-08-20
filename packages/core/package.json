@@ -1,0 +1,16 @@
+{
+  "name": "@openspec/core",
+  "type": "module",
+  "private": true,
+  "exports": {
+    "./*": "./src/*/service.ts",
+    "./*/schema": "./src/*/schema.ts",
+    "./*/model": "./src/*/model.ts"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  }
+}

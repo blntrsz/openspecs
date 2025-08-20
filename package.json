@@ -1,0 +1,27 @@
+{
+  "name": "openspec",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "prepublishOnly": "echo prepublishOnly",
+    "local-release": "changeset version && changeset publish"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "@changesets/cli": "^2.29.6",
+    "@effect/ai": "^0.26.0",
+    "@effect/platform": "^0.90.5",
+    "@effect/platform-node": "^0.96.0",
+    "effect": "^3.17.8",
+    "yaml": "^2.8.1"
+  }
+}
