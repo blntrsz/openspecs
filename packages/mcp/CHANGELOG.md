@@ -1,5 +1,11 @@
 # @openspecs/mcp
 
+## 0.1.3
+
+### Patch Changes
+
+- 1671f9f: fix bin
+
 ## 0.1.2
 
 ### Patch Changes
