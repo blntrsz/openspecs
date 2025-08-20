@@ -1,5 +1,11 @@
 # @openspecs/mcp
 
+## 0.1.2
+
+### Patch Changes
+
+- d4356ac: add bin into package.json
+
 ## 0.1.1
 
 ### Patch Changes
