@@ -1,5 +1,11 @@
 # @openspecs/mcp
 
+## 0.1.5
+
+### Patch Changes
+
+- 83b029c: rename bin to mcp
+
 ## 0.1.4
 
 ### Patch Changes
