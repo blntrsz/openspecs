@@ -1,8 +1,8 @@
 import { AiError, AiTool, AiToolkit, McpServer } from "@effect/ai";
 import { Effect, Layer, Schema } from "effect";
-import { CreateTaskSchema, TaskSchema } from "@openspec/core/task/schema";
-import { TaskService } from "@openspec/core/task";
-import { TaskModel } from "@openspec/core/task/model";
+import { CreateTaskSchema, TaskSchema } from "@openspecs/core/task/schema";
+import { TaskService } from "@openspecs/core/task";
+import { TaskModel } from "@openspecs/core/task/model";
 
 const toolkit = AiToolkit.make(
   AiTool.make("list_tasks", {

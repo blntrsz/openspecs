@@ -1,5 +1,5 @@
 {
-  "name": "@openspec/core",
+  "name": "@openspecs/core",
   "type": "module",
   "private": true,
   "exports": {

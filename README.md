@@ -1,4 +1,4 @@
-# openspec
+# openspecs
 
 To install dependencies:
 

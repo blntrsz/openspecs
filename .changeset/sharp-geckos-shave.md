@@ -1,5 +1,5 @@
 ---
-"@openspec/mcp": minor
+"@openspecs/mcp": minor
 ---
 
 Initial release

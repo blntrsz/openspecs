@@ -2,7 +2,7 @@
   "lockfileVersion": 1,
   "workspaces": {
     "": {
-      "name": "openspec",
+      "name": "openspecs",
       "dependencies": {
         "@changesets/cli": "^2.29.6",
         "@effect/ai": "^0.26.0",
@@ -19,7 +19,7 @@
       },
     },
     "packages/core": {
-      "name": "@openspec/core",
+      "name": "@openspecs/core",
       "devDependencies": {
         "@types/bun": "latest",
       },
@@ -28,7 +28,7 @@
       },
     },
     "packages/mcp": {
-      "name": "@openspec/mcp",
+      "name": "@openspecs/mcp",
       "version": "0.0.1",
       "dependencies": {
         "tsup": "^8.5.0",
@@ -182,9 +182,9 @@
 
     "@nodelib/fs.walk": ["@nodelib/fs.walk@1.2.8", "", { "dependencies": { "@nodelib/fs.scandir": "2.1.5", "fastq": "^1.6.0" } }, "sha512-oGB+UxlgWcgQkgwo8GcEGwemoTFt3FIO9ababBmaGwXIoBKZ+GTy0pP185beGg7Llih/NSHSV2XAs1lnznocSg=="],
 
-    "@openspec/core": ["@openspec/core@workspace:packages/core"],
+    "@openspecs/core": ["@openspecs/core@workspace:packages/core"],
 
-    "@openspec/mcp": ["@openspec/mcp@workspace:packages/mcp"],
+    "@openspecs/mcp": ["@openspecs/mcp@workspace:packages/mcp"],
 
     "@opentelemetry/semantic-conventions": ["@opentelemetry/semantic-conventions@1.36.0", "", {}, "sha512-TtxJSRD8Ohxp6bKkhrm27JRHAxPczQA7idtcTOMYI+wQRRrfgqxHv1cFbCApcSnNjtXkmzFozn6jQtFrOmbjPQ=="],
 

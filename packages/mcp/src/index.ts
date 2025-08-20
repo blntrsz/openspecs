@@ -5,7 +5,7 @@ import { Layer, Logger } from "effect";
 import { TaskMcpTools } from "./task.js";
 
 McpServer.layerStdio({
-  name: "openspec-mcp",
+  name: "openspecs-mcp",
   version: "0.1.0",
   stdin: NodeStream.stdin,
   stdout: NodeSink.stdout,
