@@ -2,11 +2,13 @@
   "name": "@openspecs/mcp",
   "module": "index.ts",
   "type": "module",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "main": "dist/index.js",
-  "bin": "dist/index.js",
+  "bin": {
+    "@openspecs/mcp": "dist/index.js"
+  },
   "files": [
-    "dist"
+    "dist/index.js"
   ],
   "scripts": {
     "build": "bun build ./src/index.ts  --target=node --outfile dist/index.js",
