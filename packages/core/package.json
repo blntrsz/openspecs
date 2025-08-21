@@ -5,12 +5,16 @@
   "exports": {
     "./*": "./src/*/service.ts",
     "./*/schema": "./src/*/schema.ts",
-    "./*/model": "./src/*/model.ts"
+    "./*/model": "./src/*/model.ts",
+    "./prompt": "./src/prompt.ts"
   },
   "devDependencies": {
     "@types/bun": "latest"
   },
   "peerDependencies": {
     "typescript": "^5"
+  },
+  "dependencies": {
+    "sqids": "^0.3.0"
   }
 }

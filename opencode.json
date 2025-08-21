@@ -1,0 +1,14 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "autoupdate": true,
+  "mcp": {
+    "openspecs": {
+      "type": "local",
+      "command": [
+        "npx",
+        "@openspecs/mcp@latest"
+      ],
+      "enabled": true
+    }
+  }
+}

@@ -4,6 +4,7 @@ import { FileSystem } from "@effect/platform";
 import { BASE_PATH, TASK_FILE } from "../constants.js";
 import yaml from "yaml";
 import { TaskSchema } from "./schema.js";
+import { createPrompt } from "../prompt.js";
 
 export class YamlParseError extends Data.Error<{
   message: string;
@@ -27,20 +28,15 @@ export class TaskService extends Effect.Service<TaskService>()(
       const list = Effect.fn(function* (spec: string) {
         const plain = yield* fs
           .readFileString(`${BASE_PATH}/${spec}/${TASK_FILE}`)
-          // TODO: filter for not found error
-          .pipe(Effect.catchTag("SystemError", () => Effect.succeed("")));
+          .pipe(
+            Effect.catchTag("SystemError", () => Effect.succeed("")),
+            Effect.catchTag("BadArgument", () => Effect.succeed(""))
+          );
 
-        const parsed = yield* Effect.tryPromise({
-          try: () => yaml.parse(plain),
-          catch: (error) =>
-            new YamlParseError({
-              message: `Failed to parse YAML file`,
-              cause: error,
-            }),
-        });
+        const parsed = yaml.parse(plain) || [];
 
         const arr = yield* Schema.decodeUnknown(Schema.Array(TaskSchema))(
-          parsed,
+          parsed
         );
 
         const map = new Map<string, TaskSchema>();
@@ -59,24 +55,24 @@ export class TaskService extends Effect.Service<TaskService>()(
             message: `Task with ID ${id} not found in spec ${spec}`,
           });
         }
+
+        return task;
       });
 
       const save = Effect.fn(function* (
         spec: string,
-        tasks: Map<string, TaskSchema>,
+        tasks: Map<string, TaskSchema>
       ) {
-        const yamlString = yield* Effect.try({
-          try: () => yaml.stringify([...tasks.values()]),
-          catch: (error) =>
-            new YamlParseError({
-              message: `Failed to stringify tasks to YAML`,
-              cause: error,
-            }),
-        });
+        // Ensure the file path exists
+        const exists = yield* fs.exists(`${BASE_PATH}/${spec}/${TASK_FILE}`);
+
+        if (!exists) {
+          yield* fs.makeDirectory(`${BASE_PATH}/${spec}`, { recursive: true });
+        }
 
         yield* fs.writeFileString(
           `${BASE_PATH}/${spec}/${TASK_FILE}`,
-          yamlString,
+          yaml.stringify([...tasks.values()])
         );
       });
 
@@ -101,6 +97,8 @@ export class TaskService extends Effect.Service<TaskService>()(
         tasks.set(task.id, task);
 
         yield* save(spec, tasks);
+
+        return task;
       });
 
       const destroy = Effect.fn(function* (spec: string, id: string) {
@@ -123,7 +121,7 @@ export class TaskService extends Effect.Service<TaskService>()(
           const isTodo = task.status === "todo";
           const hasNoDependencies = task.dependencies.length === 0;
           const dependenciesCompleted = task.dependencies.every(
-            (depId) => mapTasks.get(depId)?.status === "completed",
+            (depId) => mapTasks.get(depId)?.status === "completed"
           );
 
           return isTodo && hasNoDependencies && dependenciesCompleted;
@@ -156,11 +154,19 @@ export class TaskService extends Effect.Service<TaskService>()(
         });
         yield* update(spec, task);
 
-        return `Started working on task: ${task.name} ${task.description} (ID: ${task.id}). When you finished the task, please update its status to 'completed'.`;
+        return createPrompt({
+          taskContext:
+            "You will be acting as AI assistant working on a task. Your persona is a Senior Software Engineer with expertise in executing tasks efficiently step-by-step.",
+          toneContext: "Professional and concise",
+          backgroundData: "",
+          detailedTaskInstructions: "Follow the task instructions carefully.",
+          chainOfThought: "Think about your answer first",
+          finalRequest: `<task><id>${task.id}</id><name>${task.name}</name><description>${task.description}</description></task>`,
+        });
       });
 
       return { list, find, add, update, destroy, workOnNextAvailable } as const;
     }),
     dependencies: [NodeFileSystem.layer],
-  },
+  }
 ) {}
